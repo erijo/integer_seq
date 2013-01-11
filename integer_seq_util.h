@@ -8,6 +8,8 @@
 
 #include "integer_seq.h"
 
+#include <utility>
+
 namespace redi
 {
   template<int N, typename T, T... I>
@@ -29,13 +31,14 @@ namespace redi
     }
 
   template<typename F, typename Tuple, typename Indices
-            = make_index_seq<std::tuple_size<Tuple>::value>>
+           = make_index_seq<std::tuple_size<Tuple>::value>>
     auto
     apply(F&& f, Tuple&& args) ->
     decltype(apply_(std::forward<F>(f), std::forward<Tuple>(args), Indices()))
     {
       return apply_(std::forward<F>(f), std::forward<Tuple>(args), Indices());
     }
+
 }  // namespace redi
 
 #endif  // REDI_INTEGER_SEQ_UTIL_H
