@@ -73,13 +73,13 @@ namespace redi
 
 
   template<typename... Args>
-    using int_seq_of = make_int_seq<sizeof...(Args)>;
+    using to_int_seq = make_int_seq<sizeof...(Args)>;
 
   template<typename... Args>
-    using uint_seq_of = make_uint_seq<sizeof...(Args)>;
+    using to_uint_seq = make_uint_seq<sizeof...(Args)>;
 
   template<typename... Args>
-    using index_seq_of = make_index_seq<sizeof...(Args)>;
+    using to_index_seq = make_index_seq<sizeof...(Args)>;
 
 }  // namespace redi
 
