@@ -22,6 +22,16 @@ namespace redi
     multiply(integer_seq<T, I...>) noexcept
     { return {}; }
 
+  template<typename T, T I0, T... I>
+    constexpr integer_seq<T, I0>
+    car(integer_seq<T, I0, I...>) noexcept
+    { return {}; }
+
+  template<typename T, T I0, T... I>
+    constexpr integer_seq<T, I...>
+    cdr(integer_seq<T, I0, I...>) noexcept
+    { return {}; }
+
   template<typename F, typename Tuple, std::size_t... I>
     auto
     apply_(F&& f, Tuple&& args, index_seq<I...>)
