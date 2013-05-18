@@ -13,28 +13,28 @@
 namespace redi
 {
   template<int N, typename T, T... I>
-    constexpr integer_seq<T, N+I...>
-    add(integer_seq<T, I...>) noexcept
+    constexpr integer_sequence<T, N+I...>
+    add(integer_sequence<T, I...>) noexcept
     { return {}; }
 
   template<int N, typename T, T... I>
-    constexpr integer_seq<T, N*I...>
-    multiply(integer_seq<T, I...>) noexcept
+    constexpr integer_sequence<T, N*I...>
+    multiply(integer_sequence<T, I...>) noexcept
     { return {}; }
 
   template<typename T, T I0, T... I>
-    constexpr integer_seq<T, I0>
-    car(integer_seq<T, I0, I...>) noexcept
+    constexpr integer_sequence<T, I0>
+    car(integer_sequence<T, I0, I...>) noexcept
     { return {}; }
 
   template<typename T, T I0, T... I>
-    constexpr integer_seq<T, I...>
-    cdr(integer_seq<T, I0, I...>) noexcept
+    constexpr integer_sequence<T, I...>
+    cdr(integer_sequence<T, I0, I...>) noexcept
     { return {}; }
 
   template<typename F, typename Tuple, std::size_t... I>
     auto
-    apply_(F&& f, Tuple&& args, index_seq<I...>)
+    apply_(F&& f, Tuple&& args, index_sequence<I...>)
     noexcept(noexcept(std::forward<F>(f)(std::get<I>(std::forward<Tuple>(args))...)))
     -> decltype(std::forward<F>(f)(std::get<I>(std::forward<Tuple>(args))...))
     {
@@ -42,7 +42,7 @@ namespace redi
     }
 
   template<typename F, typename Tuple, typename Indices
-           = make_index_seq<std::tuple_size<Tuple>::value>>
+           = make_index_sequence<std::tuple_size<Tuple>::value>>
     auto
     apply(F&& f, Tuple&& args)
     noexcept(noexcept(apply_(std::forward<F>(f), std::forward<Tuple>(args), Indices())))

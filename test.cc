@@ -7,17 +7,17 @@
 
 #include <type_traits>
 
-template<int I> struct Wrap { };  // create a type from an integer
+template<std::size_t I> struct Wrap { };  // create a type from an integer
 
-template<int N, int... Ind>
+template<int N, std::size_t... Ind>
 struct test
 {
-  typedef redi::make_int_seq<N> test_type;
-  typedef redi::int_seq<Ind...> expected;
+  typedef redi::make_index_sequence<N> test_type;
+  typedef redi::index_sequence<Ind...> expected;
 
   static_assert(std::is_same<test_type, expected>::value, "ok");
 
-  typedef redi::int_seq_of<Wrap<Ind>...>        test2_type;
+  typedef redi::index_sequence_for<Wrap<Ind>...>        test2_type;
   static_assert(std::is_same<test2_type, expected>::value, "ok");
 };
 
