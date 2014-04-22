@@ -42,7 +42,7 @@ namespace redi
     }
 
   template<typename F, typename Tuple, typename Indices
-           = make_index_sequence<std::tuple_size<Tuple>::value>>
+           = make_index_sequence<std::tuple_size<typename std::decay<Tuple>::type>::value>>
     auto
     apply(F&& f, Tuple&& args)
     noexcept(noexcept(apply_(std::forward<F>(f), std::forward<Tuple>(args), Indices())))
